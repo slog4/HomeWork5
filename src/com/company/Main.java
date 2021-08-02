@@ -6,10 +6,10 @@ public class Main {
     public static int coordinate_x;
     public static int coordinate_y;
     public static char secondPlayer;
-    public static char symbol;
+//    public static char symbol;
     public static char enterSimbol;
 
-    int countEndGame = 1;
+//    int countEndGame = 1;
     Scanner scanner = new Scanner(System.in);
     public static char EnterCharUser(){
 
@@ -180,10 +180,96 @@ int cordinate_x = 0;
 
             }
 
-    line = ExamenLine(game);
+//    line = ExamenLine(game);
+            //_____________________Проверка линий______________________
+            line = ExamenLine1(game);
+            //___________________________Конец проверки линии__________________
     if (line == true){break;}
 }while (endGame == true);
 
+    }
+
+    private static boolean ExamenLine1(char[][] game) {
+        char symbol_1 = 'O';
+        char symbol_2 = 'X';
+        for (int row = 0; row < game.length; row++){
+            int count_O = 0;
+            int count_X = 0;
+            for (int column = 0; column < game[row].length; column++){
+                if (game[row][column]==symbol_1){
+                    count_O++;
+                }
+                if (game[row][column]==symbol_2){
+                    count_X++;
+                }
+            }
+            if (count_O == game.length){
+                System.out.printf("Выиграл %S", symbol_1);
+                break;
+            }if (count_X == game.length){
+                System.out.printf("Выиграл %S", symbol_2);
+                break;
+            }
+        }
+        for (int column = 0; column < game.length; column++){
+            int count_O = 0;
+            int count_X = 0;
+            for (int row = 0; row < game[column].length; row++){
+                if (game[row][column]==symbol_1){
+                    count_O++;
+                }
+                if (game[row][column]==symbol_2){
+                    count_X++;
+                }
+            }
+            if (count_O == game.length){
+                System.out.printf("Выиграл %S", symbol_1);
+                break;
+            }if (count_X == game.length){
+                System.out.printf("Выиграл %S", symbol_2);
+                break;
+            }
+        }
+        int count_O = 0;
+        int count_X = 0;
+        for (int row = 0; row < game.length; row++){
+            if (game[row][row]==symbol_1){
+                count_O++;
+            }
+            if (game[row][row]==symbol_2){
+                count_X++;
+            }
+        }
+        if (count_O == game.length){
+            System.out.printf("Выиграл %S", symbol_1);
+            return true;
+        }
+        if (count_X == game.length){
+            System.out.printf("Выиграл %S", symbol_2);
+            return true;
+        }
+        count_O = 0;
+        count_X = 0;
+
+
+        for (int row = 0; row < game.length; row++){
+            int diagonal = (game.length-1)-row;
+            if (game[row][diagonal]==symbol_1){
+                count_O++;
+            }
+            if (game[row][diagonal]==symbol_2){
+                count_X++;
+            }
+        }
+        if (count_O == game.length){
+            System.out.printf("Выиграл %S", symbol_1);
+            return true;
+        }
+        if (count_X == game.length){
+            System.out.printf("Выиграл %S", symbol_2);
+            return true;
+        }
+        return false;
     }
 
     private static void PrintGame(char[][] game) {
